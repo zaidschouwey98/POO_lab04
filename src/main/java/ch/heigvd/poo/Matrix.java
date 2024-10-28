@@ -1,22 +1,11 @@
 package ch.heigvd.poo;
 
-
 import java.util.Random;
 import java.lang.Math;
-
-class Dad{
-
-
-    public void dosmth(Matrix second){
-
-    }
-
-}
 
 public class Matrix {
     int width;  // M
     int height; // N
-
     int modulo;
 
     int[][] content;    // columns contain rows
@@ -36,56 +25,56 @@ public class Matrix {
 
     private void generateMatrix(int n) {
         Random rand = new Random();
-
         for (int i = 0; i < height; i++){
             for (int j = 0; j < width; j++){
                 this.content[i][j] = rand.nextInt(n);
             }
         }
-
-
     }
 
     // Improve this so that it has a pretty print even if the values don't have the same digit number
     public void displayMatrix(){
-        System.out.println("Displaying Matrix");
         for (int i = 0; i < height; i++){
-            System.out.print("[");
             for (int j = 0; j < width; j++){
                 System.out.print(content[i][j]);
                 if (j < width - 1)
                     System.out.print(" ");
             }
-            System.out.print("]");
             System.out.print("\n");
         }
     }
 
-    public void iterateOverMatrix(){
-        for (int i = 0; i < height; i++){
-            for (int j = 0; j < width; j++){
+    private Matrix loop(MatrixOperation op, Matrix secondMatrix){
+        Matrix res = new Matrix(secondMatrix.width, secondMatrix.height,1); // de la même taille que les deux autres
 
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                int a = this.content[i][j];
+                int b = secondMatrix.content[i][j];
+                int c = op.apply(a, b, this.modulo);
+
+                res.content[i][j] = c;
             }
         }
+        return res;
     }
 
-    public void add(Matrix secondMatrix) throws RuntimeException{
-        for (int i = 0; i < height; i++){
-            for (int j = 0; j < width; j++){
-
-            }
-        }
-
-
+    public Matrix add(Matrix secondMatrix){
+        Addition addOp = new Addition();
+        return this.loop(addOp, secondMatrix);
     }
-    public void substract(Matrix secondMatrix){
-        for (int i = 0; i < height; i++){
-            for (int j = 0; j < width; j++){
-                this.content[i][j] -= secondMatrix.content[i][j];
-            }
-        }
-    }
-    public void multiply(Matrix secondMatrix){
 
+    public Matrix sub(Matrix secondMatrix) {
+        Subtraction subOp = new Subtraction();
+        return this.loop(subOp, secondMatrix);
     }
+
+    public Matrix multiply(Matrix secondMatrix) throws RuntimeException{
+        if(this.modulo != secondMatrix.modulo)
+            throw new RuntimeException("modulo does not match");
+
+        Multiplication mulOp = new Multiplication();
+        return this.loop(mulOp, secondMatrix);
+    }
+
 }
