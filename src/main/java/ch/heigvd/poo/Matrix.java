@@ -15,12 +15,13 @@ public class Matrix {
         this.modulo = n;
         this.content = new int[height][width];
         generateMatrix(n);
-
-
     }
-    public Matrix(int[][] matrix){
-        this.content = matrix;
 
+    public Matrix(int[][] matrix, int n){
+        this.content = matrix;
+        this.width = matrix[0].length;
+        this.height = matrix.length;
+        this.modulo = n;
     }
 
     private void generateMatrix(int n) {
@@ -46,7 +47,6 @@ public class Matrix {
 
     private Matrix loop(MatrixOperation op, Matrix secondMatrix){
         Matrix res = new Matrix(secondMatrix.width, secondMatrix.height,1); // de la même taille que les deux autres
-
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 int a = this.content[i][j];
@@ -70,9 +70,6 @@ public class Matrix {
     }
 
     public Matrix multiply(Matrix secondMatrix) throws RuntimeException{
-        if(this.modulo != secondMatrix.modulo)
-            throw new RuntimeException("modulo does not match");
-
         Multiplication mulOp = new Multiplication();
         return this.loop(mulOp, secondMatrix);
     }
