@@ -8,13 +8,13 @@ abstract class MatrixOperation {
 
 class Addition extends MatrixOperation{
     public int apply(int a, int b, int modulo){
-        return a + b;
+        return Math.floorMod(a + b, modulo);
     }
 }
 
 class Subtraction extends MatrixOperation{
     public int apply(int a, int b, int modulo){
-        return a - b;
+        return Math.floorMod(a - b, modulo);
     }
 }
 
