@@ -21,6 +21,5 @@ class Subtraction extends MatrixOperation{
 class Multiplication extends MatrixOperation{
     public int apply(int a, int b, int modulo){
         return Math.floorMod(a * b, modulo);
-
     }
 }

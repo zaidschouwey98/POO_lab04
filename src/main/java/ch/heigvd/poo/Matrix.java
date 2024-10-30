@@ -19,8 +19,8 @@ public class Matrix {
 
     public Matrix(int[][] matrix, int n){
         this.content = matrix;
-        this.width = matrix[0].length;
         this.height = matrix.length;
+        this.width = matrix[0].length;
         this.modulo = n;
     }
 
@@ -32,7 +32,6 @@ public class Matrix {
             }
         }
     }
-
     // Improve this so that it has a pretty print even if the values don't have the same digit number
     public void displayMatrix(){
         for (int i = 0; i < height; i++){
@@ -45,12 +44,25 @@ public class Matrix {
         }
     }
 
+    private int accessAt(int height_index, int width_index){
+        if (height_index < this.height && width_index < this.width){
+            return this.content[height_index][width_index];
+        }
+        return 0;
+    }
+
+
     private Matrix loop(MatrixOperation op, Matrix secondMatrix){
+        if (this.modulo != secondMatrix.modulo){
+            throw new RuntimeException("Not the same modulo");
+        }
         Matrix res = new Matrix(secondMatrix.width, secondMatrix.height,1); // de la même taille que les deux autres
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                int a = this.content[i][j];
-                int b = secondMatrix.content[i][j];
+        int maxHeight = Math.max(height, secondMatrix.height);
+        int maxWidth = Math.max(width, secondMatrix.width);
+        for (int i = 0; i < maxHeight; i++) {
+            for (int j = 0; j < maxWidth; j++) {
+                int a = this.accessAt(i, j);
+                int b = secondMatrix.accessAt(i, j);
                 int c = op.apply(a, b, this.modulo);
 
                 res.content[i][j] = c;
@@ -59,12 +71,12 @@ public class Matrix {
         return res;
     }
 
-    public Matrix add(Matrix secondMatrix){
+    public Matrix add(Matrix secondMatrix) throws RuntimeException{
         Addition addOp = new Addition();
         return this.loop(addOp, secondMatrix);
     }
 
-    public Matrix sub(Matrix secondMatrix) {
+    public Matrix sub(Matrix secondMatrix) throws RuntimeException{
         Subtraction subOp = new Subtraction();
         return this.loop(subOp, secondMatrix);
     }

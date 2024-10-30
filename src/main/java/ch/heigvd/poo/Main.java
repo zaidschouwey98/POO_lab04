@@ -4,7 +4,7 @@ import ch.heigvd.poo.Matrix;
 
 public class Main {
     public static void main(String[] args) {
-
+        /*
         int sameSize1 [][] = {
                 {1, 3, 1, 1},
                 {3, 2, 4, 2},
@@ -30,7 +30,7 @@ public class Main {
         Matrix mat5 = mat1.multiply(mat2);
         System.out.println("Res multiply");
         mat5.displayMatrix();
-
+        */
         /*
         int M = 5;
         int N = 3;
@@ -60,8 +60,8 @@ public class Main {
         Addtion op1;
         Matrix mat3 = op1.operate(mat1, mat2);
         */
-        /*
-        int oneContent [][] = {
+
+        int[][] oneContent = {
                 {1, 3, 1, 1},
                 {3, 2, 4, 2},
                 {1, 0, 1, 0}
@@ -70,16 +70,28 @@ public class Main {
         Matrix matOne = new Matrix(oneContent, 5);
 
         System.out.println("one");
-        mat1.displayMatrix();
+        matOne.displayMatrix();
 
-        int twoContent [][] = {
+        int[][] twoContent = {
                 {1, 4, 2, 3, 2},
                 {0, 1, 0, 4, 2},
                 {0, 0, 2, 0, 2}
         };
         Matrix matTwo = new Matrix(twoContent, 5);
         System.out.println("two");
-        mat2.displayMatrix();
-        */
+        matTwo.displayMatrix();
+
+        Matrix mat3 = matOne.add(matTwo);
+        System.out.println("one + two");
+        mat3.displayMatrix();
+
+        Matrix mat4 = matOne.sub(matTwo);
+        System.out.println("one − two");
+        mat4.displayMatrix();
+
+        Matrix mat5 = matOne.multiply(matTwo);
+        System.out.println("one x two");
+        mat5.displayMatrix();
+
     }
 }
