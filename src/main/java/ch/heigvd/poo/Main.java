@@ -1,3 +1,4 @@
+// Main.java
 package ch.heigvd.poo;
 
 import ch.heigvd.poo.Matrix;
@@ -16,6 +17,23 @@ public class Main {
 
         Matrix matOne = new Matrix(N1, M1, modulo);
         Matrix matTwo = new Matrix(N2, M2, modulo);
+
+        /* Uncomment this to test the given example
+        int[][] oneContent = {
+                {1, 3, 1, 1},
+                {3, 2, 4, 2},
+                {1, 0, 1, 0}
+        };
+
+        Matrix matOne = new Matrix(oneContent, 5);
+
+
+        int[][] twoContent = {
+                {1, 4, 2, 3, 2},
+                {0, 1, 0, 4, 2},
+                {0, 0, 2, 0, 2}
+        };
+        */
 
         System.out.println("The modulus is " + modulo + "\n");
 
@@ -36,24 +54,5 @@ public class Main {
         Matrix mat5 = matOne.multiply(matTwo);
         System.out.println("one x two");
         System.out.println(mat5);
-
-        /*
-        int[][] oneContent = {
-                {1, 3, 1, 1},
-                {3, 2, 4, 2},
-                {1, 0, 1, 0}
-        };
-
-        Matrix matOne = new Matrix(oneContent, 5);
-
-
-        int[][] twoContent = {
-                {1, 4, 2, 3, 2},
-                {0, 1, 0, 4, 2},
-                {0, 0, 2, 0, 2}
-        };
-
-        */
-
     }
 }

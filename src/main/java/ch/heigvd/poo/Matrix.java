@@ -1,12 +1,13 @@
+//Matrix.java
 package ch.heigvd.poo;
 
 import java.util.Random;
 import java.lang.Math;
 
 public class Matrix {
-    int width;  // M
-    int height; // N
-    int modulo;
+    private int width;  // M
+    private int height; // N
+    private int modulo;
 
     int[][] content;    // columns contain rows
     public Matrix(int width, int height, int n) throws RuntimeException {
@@ -30,7 +31,7 @@ public class Matrix {
 
         this.content = matrix_content;
         this.height = matrix_content.length;
-        this.width = matrix_content[0].length;  // matrix_content[0] always exists since we ask for bidimensional table
+        this.width = matrix_content[0].length;  // matrix_content[0] always exists since we ask for two-dimensional table
         this.modulo = n;
     }
 
@@ -68,11 +69,11 @@ public class Matrix {
     }
 
 
-    private Matrix loop(MatrixOperation op, Matrix secondMatrix) throws RuntimeException{
+    private Matrix operationLoop(MatrixOperation op, Matrix secondMatrix) throws RuntimeException{
         if (this.modulo != secondMatrix.modulo){
             throw new RuntimeException("Not the same modulo");
         }
-        Matrix res = new Matrix(secondMatrix.width, secondMatrix.height,1); // de la même taille que les deux autres
+        Matrix res = new Matrix(secondMatrix.width, secondMatrix.height,secondMatrix.modulo);
         int maxHeight = Math.max(height, secondMatrix.height);
         int maxWidth = Math.max(width, secondMatrix.width);
         for (int i = 0; i < maxHeight; i++) {
@@ -89,17 +90,17 @@ public class Matrix {
 
     public Matrix add(Matrix secondMatrix) throws RuntimeException{
         Addition addOp = new Addition();
-        return this.loop(addOp, secondMatrix);
+        return this.operationLoop(addOp, secondMatrix);
     }
 
     public Matrix sub(Matrix secondMatrix) throws RuntimeException{
         Subtraction subOp = new Subtraction();
-        return this.loop(subOp, secondMatrix);
+        return this.operationLoop(subOp, secondMatrix);
     }
 
     public Matrix multiply(Matrix secondMatrix) throws RuntimeException{
         Multiplication mulOp = new Multiplication();
-        return this.loop(mulOp, secondMatrix);
+        return this.operationLoop(mulOp, secondMatrix);
     }
 
 }

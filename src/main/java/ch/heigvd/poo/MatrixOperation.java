@@ -1,6 +1,6 @@
+//MatrixOperation.java
 package ch.heigvd.poo;
 import java.lang.Math;
-
 
 abstract class MatrixOperation {
     public abstract int apply(int a, int b, int modulo);
