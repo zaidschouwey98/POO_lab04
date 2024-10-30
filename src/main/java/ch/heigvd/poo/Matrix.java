@@ -33,6 +33,7 @@ public class Matrix {
         }
     }
     // Improve this so that it has a pretty print even if the values don't have the same digit number
+    /*
     public void displayMatrix(){
         for (int i = 0; i < height; i++){
             for (int j = 0; j < width; j++){
@@ -42,6 +43,18 @@ public class Matrix {
             }
             System.out.print("\n");
         }
+    }
+     */
+
+    public String toString(){
+        String result = "";
+        for (int i = 0; i < height; i++){
+            for (int j = 0; j < width; j++){
+                result += (j == 0 ? "" : " ") + content[i][j] ;
+            }
+            result += (i == height - 1 ? "" : "\n" );
+        }
+        return result;
     }
 
     private int accessAt(int height_index, int width_index){
