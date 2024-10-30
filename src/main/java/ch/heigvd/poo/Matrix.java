@@ -9,7 +9,9 @@ public class Matrix {
     int modulo;
 
     int[][] content;    // columns contain rows
-    public Matrix(int width, int height, int n) {
+    public Matrix(int width, int height, int n) throws RuntimeException {
+        verifyModuloValidity(n);
+
         this.width = width;
         this.height = height;
         this.modulo = n;
@@ -17,11 +19,25 @@ public class Matrix {
         generateMatrix(n);
     }
 
-    public Matrix(int[][] matrix, int n){
-        this.content = matrix;
-        this.height = matrix.length;
-        this.width = matrix[0].length;
+    public Matrix(int[][] matrix_content, int n) throws RuntimeException{
+        verifyModuloValidity(n);
+
+        int lineSize = matrix_content[0].length;
+        for (int[] ints : matrix_content) {
+            if (ints.length != lineSize)
+                throw new RuntimeException("Incompatible line sizes");
+        }
+
+        this.content = matrix_content;
+        this.height = matrix_content.length;
+        this.width = matrix_content[0].length;  // matrix_content[0] always exists since we ask for bidimensional table
         this.modulo = n;
+    }
+
+    private void verifyModuloValidity(int n) throws RuntimeException{
+        if (n == 0){
+            throw new RuntimeException("Can not do mod 0");
+        }
     }
 
     private void generateMatrix(int n) {
@@ -32,19 +48,6 @@ public class Matrix {
             }
         }
     }
-    // Improve this so that it has a pretty print even if the values don't have the same digit number
-    /*
-    public void displayMatrix(){
-        for (int i = 0; i < height; i++){
-            for (int j = 0; j < width; j++){
-                System.out.print(content[i][j]);
-                if (j < width - 1)
-                    System.out.print(" ");
-            }
-            System.out.print("\n");
-        }
-    }
-     */
 
     public String toString(){
         String result = "";
@@ -65,7 +68,7 @@ public class Matrix {
     }
 
 
-    private Matrix loop(MatrixOperation op, Matrix secondMatrix){
+    private Matrix loop(MatrixOperation op, Matrix secondMatrix) throws RuntimeException{
         if (this.modulo != secondMatrix.modulo){
             throw new RuntimeException("Not the same modulo");
         }
