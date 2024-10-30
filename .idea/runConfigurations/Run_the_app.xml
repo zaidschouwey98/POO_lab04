@@ -2,6 +2,7 @@
   <configuration default="false" name="Run the app" type="Application" factoryName="Application">
     <option name="MAIN_CLASS_NAME" value="ch.heigvd.poo.Main" />
     <module name="Labo04" />
+    <option name="PROGRAM_PARAMETERS" value="5 5 5 5 10" />
     <method v="2">
       <option name="Make" enabled="true" />
     </method>
