@@ -1,4 +1,4 @@
-# Rapport Lab04
+# Rapport Lab04 Zaid Schouwey Camille Theubet
 
 Ce rapport du Laboratoire 4 en POO présente une classe de matrice permettant
 de créer des matrices de tailles variables et de réaliser des opérations comme l’addition,
